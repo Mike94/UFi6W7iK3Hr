@@ -52,6 +52,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         labelTitle1.setText("Sistema de Costos de Agua y Saneamiento [SICAS v0.6]");
 
+        blackTabbedPane2.setTabSelectedColor(new java.awt.Color(0, 102, 255));
+
         javax.swing.GroupLayout panelDefault4Layout = new javax.swing.GroupLayout(panelDefault4);
         panelDefault4.setLayout(panelDefault4Layout);
         panelDefault4Layout.setHorizontalGroup(
@@ -161,7 +163,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addGroup(panelFondo1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(blackTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 524, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 536, Short.MAX_VALUE)
                 .addComponent(labelTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

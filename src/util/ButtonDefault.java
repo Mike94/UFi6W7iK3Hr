@@ -4,6 +4,7 @@
  */
 package util;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -20,5 +21,6 @@ public class ButtonDefault extends JButton{
         setPreferredSize(dimension);
         setFont(font);
         setOpaque(false);
+        this.setCursor(Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ));
     }
 }

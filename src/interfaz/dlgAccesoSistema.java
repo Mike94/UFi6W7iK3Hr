@@ -100,8 +100,8 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
 
         pnlContenedorPrincipal.setBackground(new java.awt.Color(51, 51, 51));
 
-        lblTitulo.setBackground(new java.awt.Color(51, 51, 51));
-        lblTitulo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lblTitulo.setBackground(new java.awt.Color(56, 56, 56));
+        lblTitulo.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Acceso al Sistema SICAS");
@@ -110,7 +110,8 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(65, 64, 64));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        txtUsuario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtUsuario.setBackground(new java.awt.Color(204, 204, 204));
+        txtUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtUsuario.setText("jTextField1");
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -118,7 +119,7 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
             }
         });
 
-        btnAceptar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAceptar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnAceptar.setText("Aceptar");
         btnAceptar.setOpaque(false);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,11 +128,16 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
             }
         });
 
+        labelDefault1.setBackground(new java.awt.Color(255, 255, 255));
+        labelDefault1.setForeground(new java.awt.Color(250, 250, 250));
         labelDefault1.setText("Usuario:");
 
+        labelDefault2.setBackground(new java.awt.Color(255, 255, 255));
+        labelDefault2.setForeground(new java.awt.Color(250, 250, 250));
         labelDefault2.setText("Password:");
 
-        pswPassword.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        pswPassword.setBackground(new java.awt.Color(204, 204, 204));
+        pswPassword.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         pswPassword.setText("jPasswordField1");
         pswPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -169,9 +175,9 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDefault2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pswPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlContenedorPrincipalLayout = new javax.swing.GroupLayout(pnlContenedorPrincipal);
