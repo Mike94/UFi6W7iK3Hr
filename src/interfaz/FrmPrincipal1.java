@@ -5,19 +5,142 @@
 package interfaz;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import util.acordionmenu.AccordionItem;
+import util.acordionmenu.AccordionLeafItem;
+import util.acordionmenu.AccordionMenu;
 
 /**
  *
  * @author Miguel
  */
-public class FrmPrincipal1 extends javax.swing.JFrame {
+public final class FrmPrincipal1 extends javax.swing.JFrame {
 
+    private AccordionMenu menuAcordion;
+    private AccordionMenu menu1;
     /**
      * Creates new form FrmPrincipal1
      */
     public FrmPrincipal1() {
         initComponents();
+        //menu 1. Creates a standard menu, gray background, Center Alignment of Roots and Leafs, small monospaced font.
+        menu1 = new AccordionMenu(getSampleMenuDescriptor());
+        menu1.setBackground(new Color(204, 204, 204));
+        menu1.setMenuHorizontalAlignment(AccordionItem.CENTER);
+        menu1.setLeafHorizontalAlignment(AccordionItem.CENTER);
+        menu1.setFont(new Font("monospaced", Font.PLAIN, 13));
+        setMouseAdapter(menu1);
+        menu1.setVisible(true);
+        cont1.add(menu1);
+        cont1.setVisible(true);
+        //___________________________________________________________________________________ Soy una barra separadora :)
+         //menu 3. Creates a simple menu, white bacground and dark blue foreground, a lightGray selection backgroun on mouseover, Right Alignment for leafs
+        //two icon for all Root Items, and two icon for Leaf of second menu only
+//        menuAcordion = new AccordionMenu(getSampleMenuDescriptor());
+//        createSampleMenuStructure(menuAcordion);
+//        menuAcordion.setBackground(Color.white);
+//        menuAcordion.setForeground(Color.blue.darker().darker().darker());
+//        menuAcordion.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 15));
+//        menuAcordion.setSelectionColor(Color.lightGray);
+//        menuAcordion.setLeafHorizontalAlignment(AccordionItem.RIGHT);
+//        ImageIcon icon3 = new ImageIcon(this.getClass().getResource("/resource/blu_arrow_right.png"));
+//        ImageIcon icon4 = new ImageIcon(this.getClass().getResource("/resource/blu_arrow_down.png"));
+//        ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/resource/gray_arrow_right.png"));
+//        ImageIcon icon6 = new ImageIcon(this.getClass().getResource("/resource/green_arrow_right.png"));
+//        menuAcordion.setMenuIcons(icon3, icon4);
+//        menuAcordion.setLeafIcons("menu2", icon5, icon6);
+//        setMouseAdapter(menuAcordion);
+//        pnlMenuAcordion.add(menuAcordion);
+        //___________________________________________________________________________________ Soy una barra separadora :)
     }
+//___________________________________________________________________________________ Soy una barra separadora :)
+    /**
+     * <code>First method to create an AccordionMenu: create a description string of menu tree.</code>
+     * It creates a Standard Description String to create an AccordionMenu. This is
+     * the full structure of a correct description string. 
+     * @return description String.
+     */
+    public String getSampleMenuDescriptor() {
+        String menuDescriptor = ""
+                + "Menu One,menu1:"
+                + "Sub Menu 1,submenu1.1;"
+                + "Sub Menu 2,submenu1.2;"
+                + "Exit Button,exit;"
+                + "!"
+                + "Menu Two,menu2:"
+                + "Sub Menu 1,submenu2.1;"
+                + "Sub Menu 2,submenu2.2;"
+                + "Sub Menu 3,submenu2.3;"
+                + "!"
+                + "Menu Three,menu3:"
+                + "Sub Menu 1,submenu3.1;"
+                + "Sub Menu 2,submenu3.2;"
+                + "Sub Menu 3,submenu3.3;"
+                + "!"
+                + "Menu Four,menu4:"
+                + "Sub Menu 1,submenu4.1;"
+                + "Sub Menu 2,submenu4.2;"
+                + "Sub Menu 3,submenu4.3;";
+        return menuDescriptor;
+    }
+    
+    /**
+     * <code>Second method to create an AccordionMenu: add manually each menu with its leafs to AccordionMenu.</code>
+     * It creates manually a structure like one created before with a description String. First method is better when
+     * menu structure is static. Use this method instead if you want to create structure dinamically.
+     * @param target Target AccordionMenu to modify.
+     */
+    public void createSampleMenuStructure(AccordionMenu target) {
+        target.addNewMenu("menu1", "Menu One");
+        target.addNewLeafTo("menu1", "submenu1.1", "Sub Menu 1");
+        target.addNewLeafTo("menu1", "submenu1.2", "Sub Menu 2");
+        target.addNewLeafTo("menu1", "submenu1.3", "Sub Menu 3");
+
+        target.addNewMenu("menu2", "Menu Two");
+        target.addNewLeafTo("menu2", "submenu2.1", "Sub Menu 1");
+        target.addNewLeafTo("menu2", "submenu2.2", "Sub Menu 2");
+        target.addNewLeafTo("menu2", "submenu2.3", "Sub Menu 3");
+
+        target.addNewMenu("menu3", "Menu Three");
+        target.addNewLeafTo("menu3", "submenu3.1", "Sub Menu 1");
+        target.addNewLeafTo("menu3", "submenu3.2", "Sub Menu 2");
+        target.addNewLeafTo("menu3", "submenu3.3", "Sub Menu 3");
+
+        target.addNewMenu("menu4", "Menu Four");
+        target.addNewLeafTo("menu4", "submenu4.1", "Sub Menu 1");
+        target.addNewLeafTo("menu4", "submenu4.2", "Sub Menu 2");
+        target.addNewLeafTo("menu4", "submenu4.3", "Sub Menu 3");
+        target.calculateAvaiableSpace();
+    }
+
+    /**
+     * Simple example to browse all Leaf of menu. In this case for each leaf it adds a new Mouse Adapter.
+     * @param menu Target Menu to modify.
+     */
+    public void setMouseAdapter(AccordionMenu menu) {
+        for (AccordionLeafItem leaf : menu.getAllLeafs()) {
+            leaf.addMouseListener(getSimpleMouseAdapter());
+        }
+    }
+
+    /**
+     * Creates a simple MouseAdapter binded to an AccordionItem. On mouse Pressed it writes on a textBox the source of event.
+     * @return {@link MouseAdapter} object.
+     */
+    public MouseAdapter getSimpleMouseAdapter() {
+        return new MouseAdapter() {
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                AccordionItem item = (AccordionItem) e.getSource();
+//                message.setText("Source name: " + item.getName() + "; Source Title: " + item.getText());
+            }
+        };
+    }
+//___________________________________________________________________________________ Soy una barra separadora :)
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,319 +155,135 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
         labelTitle1 = new util.LabelTitle();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        buttonInteractive1 = new util.ButtonInteractive();
+        buttonInteractive2 = new util.ButtonInteractive();
+        buttonInteractive4 = new util.ButtonInteractive();
+        buttonInteractive5 = new util.ButtonInteractive();
+        buttonInteractive6 = new util.ButtonInteractive();
+        buttonInteractive7 = new util.ButtonInteractive();
+        buttonInteractive8 = new util.ButtonInteractive();
+        buttonInteractive9 = new util.ButtonInteractive();
+        buttonInteractive10 = new util.ButtonInteractive();
+        pnlMenuAcordion = new javax.swing.JPanel();
+        cont1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         labelTitle1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
         labelTitle1.setText("SISTEMA DE CONTROL DE AGUA  Y SANEAMIENTO [SICAS]");
 
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel1.setOpaque(false);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
         jPanel2.setOpaque(false);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton1.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setOpaque(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
-            }
-        });
+        buttonInteractive1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
+        buttonInteractive1.setText("Presupuestos");
 
-        jButton2.setBackground(new java.awt.Color(51, 204, 255));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton2.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setOpaque(false);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton2MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton2MousePressed(evt);
-            }
-        });
+        buttonInteractive2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/Gnome-document-open.png"))); // NOI18N
+        buttonInteractive2.setText("Proyectos");
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 153));
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton3.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setOpaque(false);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton3MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton3MousePressed(evt);
-            }
-        });
+        buttonInteractive4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/114.png"))); // NOI18N
+        buttonInteractive4.setText("Insumos");
+        buttonInteractive4.setColorEntered(new java.awt.Color(0, 102, 255));
+        buttonInteractive4.setColorExited(new java.awt.Color(255, 0, 0));
 
-        jButton4.setBackground(new java.awt.Color(51, 255, 0));
-        jButton4.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/006.png"))); // NOI18N
-        jButton4.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setOpaque(false);
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton4MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton4MousePressed(evt);
-            }
-        });
+        buttonInteractive5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/013.png"))); // NOI18N
+        buttonInteractive5.setText("Plantillas");
 
-        jButton5.setBackground(new java.awt.Color(153, 153, 153));
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/201.png"))); // NOI18N
-        jButton5.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setOpaque(false);
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton5MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton5MousePressed(evt);
-            }
-        });
+        buttonInteractive6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/201.png"))); // NOI18N
+        buttonInteractive6.setText("Reportes");
 
-        jButton6.setBackground(new java.awt.Color(255, 102, 0));
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton6.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton6.setOpaque(false);
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton6MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton6MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton6MousePressed(evt);
-            }
-        });
+        buttonInteractive7.setText("Ayuda");
 
-        jButton7.setBackground(new java.awt.Color(102, 255, 0));
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton7.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton7.setOpaque(false);
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton7MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton7MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton7MousePressed(evt);
-            }
-        });
+        buttonInteractive8.setText("Usuarios");
 
-        jButton8.setBackground(new java.awt.Color(153, 0, 153));
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton8.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton8.setOpaque(false);
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton8MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton8MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton8MousePressed(evt);
-            }
-        });
+        buttonInteractive9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/006.png"))); // NOI18N
+        buttonInteractive9.setText("Configuración");
 
-        jButton9.setBackground(new java.awt.Color(255, 51, 255));
-        jButton9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton9.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton9.setOpaque(false);
-        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton9MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton9MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton9MousePressed(evt);
-            }
-        });
+        buttonInteractive10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/022.png"))); // NOI18N
+        buttonInteractive10.setText("Portadas");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonInteractive1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonInteractive2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonInteractive10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonInteractive4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonInteractive5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonInteractive8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonInteractive9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonInteractive7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonInteractive6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
-        jPanel3.setOpaque(false);
-
-        jButton10.setBackground(new java.awt.Color(255, 0, 0));
-        jButton10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton10.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton10.setOpaque(false);
-        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton10MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton10MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton10MousePressed(evt);
-            }
-        });
-
-        jButton11.setBackground(new java.awt.Color(255, 0, 0));
-        jButton11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton11.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton11.setOpaque(false);
-        jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton11MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton11MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton11MousePressed(evt);
-            }
-        });
-
-        jButton12.setBackground(new java.awt.Color(255, 0, 0));
-        jButton12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
-        jButton12.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
-        jButton12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton12.setOpaque(false);
-        jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton12MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton12MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton12MousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonInteractive1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonInteractive2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonInteractive10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonInteractive4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonInteractive5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonInteractive6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonInteractive7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonInteractive8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonInteractive9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+
+        pnlMenuAcordion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));
+        pnlMenuAcordion.setOpaque(false);
+
+        javax.swing.GroupLayout cont1Layout = new javax.swing.GroupLayout(cont1);
+        cont1.setLayout(cont1Layout);
+        cont1Layout.setHorizontalGroup(
+            cont1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 263, Short.MAX_VALUE)
+        );
+        cont1Layout.setVerticalGroup(
+            cont1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 328, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pnlMenuAcordionLayout = new javax.swing.GroupLayout(pnlMenuAcordion);
+        pnlMenuAcordion.setLayout(pnlMenuAcordionLayout);
+        pnlMenuAcordionLayout.setHorizontalGroup(
+            pnlMenuAcordionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMenuAcordionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cont1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlMenuAcordionLayout.setVerticalGroup(
+            pnlMenuAcordionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMenuAcordionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cont1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -355,8 +294,8 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(pnlMenuAcordion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -365,7 +304,7 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlMenuAcordion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -394,150 +333,6 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        this.jButton1.setBackground(Color.blue);
-    }//GEN-LAST:event_jButton1MouseEntered
-
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        this.jButton1.setBackground(Color.red);
-    }//GEN-LAST:event_jButton1MouseExited
-
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        this.jButton1.setBackground(Color.green);
-    }//GEN-LAST:event_jButton1MousePressed
-
-    private void jButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseEntered
-
-    private void jButton2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MouseExited
-
-    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2MousePressed
-
-    private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseEntered
-
-    private void jButton3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MouseExited
-
-    private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3MousePressed
-
-    private void jButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4MouseEntered
-
-    private void jButton4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4MouseExited
-
-    private void jButton4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4MousePressed
-
-    private void jButton5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MouseEntered
-
-    private void jButton5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MouseExited
-
-    private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5MousePressed
-
-    private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6MouseEntered
-
-    private void jButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6MouseExited
-
-    private void jButton6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6MousePressed
-
-    private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7MouseEntered
-
-    private void jButton7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7MouseExited
-
-    private void jButton7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7MousePressed
-
-    private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8MouseEntered
-
-    private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8MouseExited
-
-    private void jButton8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8MousePressed
-
-    private void jButton9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9MouseEntered
-
-    private void jButton9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9MouseExited
-
-    private void jButton9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9MousePressed
-
-    private void jButton10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10MouseEntered
-
-    private void jButton10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10MouseExited
-
-    private void jButton10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10MousePressed
-
-    private void jButton11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseEntered
-
-    private void jButton11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MouseExited
-
-    private void jButton11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11MousePressed
-
-    private void jButton12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseEntered
-
-    private void jButton12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MouseExited
-
-    private void jButton12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12MousePressed
 
     /**
      * @param args the command line arguments
@@ -574,22 +369,20 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private util.ButtonInteractive buttonInteractive1;
+    private util.ButtonInteractive buttonInteractive10;
+    private util.ButtonInteractive buttonInteractive2;
+    private util.ButtonInteractive buttonInteractive4;
+    private util.ButtonInteractive buttonInteractive5;
+    private util.ButtonInteractive buttonInteractive6;
+    private util.ButtonInteractive buttonInteractive7;
+    private util.ButtonInteractive buttonInteractive8;
+    private util.ButtonInteractive buttonInteractive9;
+    private javax.swing.JPanel cont1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private util.LabelTitle labelTitle1;
     private util.PanelFondo panelFondo1;
+    private javax.swing.JPanel pnlMenuAcordion;
     // End of variables declaration//GEN-END:variables
 }

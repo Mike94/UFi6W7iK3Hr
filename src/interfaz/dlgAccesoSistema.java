@@ -57,12 +57,8 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
             Object[][] datos = bd.select("usuarios", "uuser,idusuarios", "uuser='" + userString + "' and upassword='" + passString + "'");
             if (datos != null) {
                 System.out.println("dato:"+datos[0][0].toString());
-                sesion._getPermisosTabla(datos[0][0].toString(),userString, bd);
-                accesoSistema=true;
-    //            frmPrincipal frame = new frmPrincipal(bd);
-                frmPrincipal frame = new frmPrincipal();
-                this.dispose();
-                frame.setVisible(true);
+                sesion._getPermisosTabla(datos[0][0].toString(),userString, bd);                
+                abrirFormPrincipal();
             }else{
                 lblTitulo.setBackground(colorError);
                 pnlContenedorPrincipal.setBackground(colorError);
@@ -71,7 +67,18 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
         }else{
             metodos._cerrarSistema();
         }
-    }    
+    }
+    
+    public void abrirFormPrincipal(){
+        accesoSistema=true;
+//            frmPrincipal frame = new frmPrincipal(bd);
+//        frmPrincipal frame = new frmPrincipal();
+//        this.dispose();
+//        frame.setVisible(true);
+        FrmPrincipal1 frame = new FrmPrincipal1();
+        this.dispose();
+        frame.setVisible(true);
+    }
 //___________________________________________________________________________________ Soy una barra separadora :)
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,6 +128,7 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
 
         btnAceptar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnAceptar.setText("Aceptar");
+        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.setOpaque(false);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +223,8 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
     }//GEN-LAST:event_txtUsuarioKeyReleased
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        _aceptar();
+//        _aceptar();
+        abrirFormPrincipal();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
