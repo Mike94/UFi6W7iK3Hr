@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufi6w7ik3hr;
+package sicas;
 
 /**
  *
  * @author Usuario
  */
-public class UFi6W7iK3Hr {
+public class Sicas {
 
     /**
      * @param args the command line arguments
