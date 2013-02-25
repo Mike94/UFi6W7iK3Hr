@@ -112,8 +112,8 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
         });
 
         jButton4.setBackground(new java.awt.Color(51, 255, 0));
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
+        jButton4.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/006.png"))); // NOI18N
         jButton4.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.setOpaque(false);
@@ -131,7 +131,7 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(153, 153, 153));
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/icons/201.png"))); // NOI18N
         jButton5.setText("<html>\t\n\t<body>\n\t\tConfiguración <br>\n\t\tde los Users<br>\n\t\tMuestra Contraseñas\n\t</body>\n</html>");
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton5.setOpaque(false);
@@ -264,7 +264,7 @@ public class FrmPrincipal1 extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.white));

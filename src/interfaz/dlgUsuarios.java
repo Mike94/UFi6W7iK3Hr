@@ -29,31 +29,40 @@ public class dlgUsuarios extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        shapeTabbedPaneUI1 = new util.shapeTabbedPaneUI();
+        shapeTabbedPaneUI2 = new util.shapeTabbedPaneUI();
         panelFondo1 = new util.PanelFondo();
-        panelDefault1 = new util.PanelDefault();
-        labelTitle1 = new util.LabelTitle();
+        blackTabbedPane1 = new util.BlackTabbedPane();
+        panelDefault2 = new util.PanelDefault();
+        panelDefault3 = new util.PanelDefault();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        labelTitle1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        labelTitle1.setText("Usuarios");
+        javax.swing.GroupLayout panelDefault2Layout = new javax.swing.GroupLayout(panelDefault2);
+        panelDefault2.setLayout(panelDefault2Layout);
+        panelDefault2Layout.setHorizontalGroup(
+            panelDefault2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 531, Short.MAX_VALUE)
+        );
+        panelDefault2Layout.setVerticalGroup(
+            panelDefault2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
 
-        javax.swing.GroupLayout panelDefault1Layout = new javax.swing.GroupLayout(panelDefault1);
-        panelDefault1.setLayout(panelDefault1Layout);
-        panelDefault1Layout.setHorizontalGroup(
-            panelDefault1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDefault1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-                .addContainerGap())
+        blackTabbedPane1.addTab("Nuevo Usuario", panelDefault2);
+
+        javax.swing.GroupLayout panelDefault3Layout = new javax.swing.GroupLayout(panelDefault3);
+        panelDefault3.setLayout(panelDefault3Layout);
+        panelDefault3Layout.setHorizontalGroup(
+            panelDefault3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 531, Short.MAX_VALUE)
         );
-        panelDefault1Layout.setVerticalGroup(
-            panelDefault1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDefault1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(282, Short.MAX_VALUE))
+        panelDefault3Layout.setVerticalGroup(
+            panelDefault3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
         );
+
+        blackTabbedPane1.addTab("tab2", panelDefault3);
 
         javax.swing.GroupLayout panelFondo1Layout = new javax.swing.GroupLayout(panelFondo1);
         panelFondo1.setLayout(panelFondo1Layout);
@@ -61,15 +70,15 @@ public class dlgUsuarios extends javax.swing.JDialog {
             panelFondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondo1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelDefault1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(blackTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelFondo1Layout.setVerticalGroup(
             panelFondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondo1Layout.createSequentialGroup()
+            .addGroup(panelFondo1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelDefault1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(blackTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelFondo1, java.awt.BorderLayout.CENTER);
@@ -119,8 +128,11 @@ public class dlgUsuarios extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private util.LabelTitle labelTitle1;
-    private util.PanelDefault panelDefault1;
+    private util.BlackTabbedPane blackTabbedPane1;
+    private util.PanelDefault panelDefault2;
+    private util.PanelDefault panelDefault3;
     private util.PanelFondo panelFondo1;
+    private util.shapeTabbedPaneUI shapeTabbedPaneUI1;
+    private util.shapeTabbedPaneUI shapeTabbedPaneUI2;
     // End of variables declaration//GEN-END:variables
 }

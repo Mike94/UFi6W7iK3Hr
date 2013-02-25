@@ -58,50 +58,50 @@ public class frmPrincipal extends javax.swing.JFrame {
         panelDefault4.setLayout(panelDefault4Layout);
         panelDefault4Layout.setHorizontalGroup(
             panelDefault4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         panelDefault4Layout.setVerticalGroup(
             panelDefault4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        blackTabbedPane2.addTab("Usuarios", panelDefault4);
+        blackTabbedPane2.addTab("Usuarios", new javax.swing.ImageIcon(getClass().getResource("/resource/icons/201.png")), panelDefault4); // NOI18N
 
         javax.swing.GroupLayout panelDefault5Layout = new javax.swing.GroupLayout(panelDefault5);
         panelDefault5.setLayout(panelDefault5Layout);
         panelDefault5Layout.setHorizontalGroup(
             panelDefault5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         panelDefault5Layout.setVerticalGroup(
             panelDefault5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        blackTabbedPane2.addTab("Insumos", panelDefault5);
+        blackTabbedPane2.addTab("Insumos", new javax.swing.ImageIcon(getClass().getResource("/resource/icons/006.png")), panelDefault5); // NOI18N
 
         javax.swing.GroupLayout panelDefault6Layout = new javax.swing.GroupLayout(panelDefault6);
         panelDefault6.setLayout(panelDefault6Layout);
         panelDefault6Layout.setHorizontalGroup(
             panelDefault6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         panelDefault6Layout.setVerticalGroup(
             panelDefault6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        blackTabbedPane2.addTab("Partidas", panelDefault6);
+        blackTabbedPane2.addTab("Partidas", new javax.swing.ImageIcon(getClass().getResource("/resource/icons/004.png")), panelDefault6); // NOI18N
 
         javax.swing.GroupLayout panelDefault7Layout = new javax.swing.GroupLayout(panelDefault7);
         panelDefault7.setLayout(panelDefault7Layout);
         panelDefault7Layout.setHorizontalGroup(
             panelDefault7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         panelDefault7Layout.setVerticalGroup(
             panelDefault7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         blackTabbedPane2.addTab("Plantillas", panelDefault7);
@@ -110,11 +110,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         panelDefault8.setLayout(panelDefault8Layout);
         panelDefault8Layout.setHorizontalGroup(
             panelDefault8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         panelDefault8Layout.setVerticalGroup(
             panelDefault8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         blackTabbedPane2.addTab("Proyectos", panelDefault8);
@@ -123,11 +123,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         panelDefault9.setLayout(panelDefault9Layout);
         panelDefault9Layout.setHorizontalGroup(
             panelDefault9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         panelDefault9Layout.setVerticalGroup(
             panelDefault9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         blackTabbedPane2.addTab("Presupuestos", panelDefault9);
@@ -136,11 +136,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         panelDefault10.setLayout(panelDefault10Layout);
         panelDefault10Layout.setHorizontalGroup(
             panelDefault10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
         );
         panelDefault10Layout.setVerticalGroup(
             panelDefault10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         blackTabbedPane2.addTab("Configuración", panelDefault10);
@@ -154,7 +154,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGroup(panelFondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelFondo1Layout.createSequentialGroup()
                         .addComponent(labelTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 295, Short.MAX_VALUE))
+                        .addGap(0, 343, Short.MAX_VALUE))
                     .addComponent(blackTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
