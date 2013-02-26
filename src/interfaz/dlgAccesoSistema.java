@@ -110,10 +110,10 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(52, 52, 52));
 
-        lblTitulo.setFont(new java.awt.Font("Calibri", 1, 17)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(244, 244, 244));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Sistema de costos de Agua y Saneamineto");
+        lblTitulo.setText("Sistema de costos de Agua y Saneamiento");
 
         jPanel3.setBackground(new java.awt.Color(78, 157, 240));
 
