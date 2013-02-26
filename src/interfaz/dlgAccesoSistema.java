@@ -8,7 +8,7 @@ import java.awt.Color;
 
 /**
  *
- * @author MK
+ * @author miguel mosquera tahua - mikiws
  */
 public class dlgAccesoSistema extends javax.swing.JDialog {
 
@@ -57,8 +57,12 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
             Object[][] datos = bd.select("usuarios", "uuser,idusuarios", "uuser='" + userString + "' and upassword='" + passString + "'");
             if (datos != null) {
                 System.out.println("dato:"+datos[0][0].toString());
-                sesion._getPermisosTabla(datos[0][0].toString(),userString, bd);                
-                abrirFormPrincipal();
+                sesion._getPermisosTabla(datos[0][0].toString(),userString, bd);
+                accesoSistema=true;
+    //            frmPrincipal frame = new frmPrincipal(bd);
+                frmPrincipal frame = new frmPrincipal();
+                this.dispose();
+                frame.setVisible(true);
             }else{
                 lblTitulo.setBackground(colorError);
                 pnlContenedorPrincipal.setBackground(colorError);
@@ -67,18 +71,7 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
         }else{
             metodos._cerrarSistema();
         }
-    }
-    
-    public void abrirFormPrincipal(){
-        accesoSistema=true;
-//            frmPrincipal frame = new frmPrincipal(bd);
-//        frmPrincipal frame = new frmPrincipal();
-//        this.dispose();
-//        frame.setVisible(true);
-        FrmPrincipal1 frame = new FrmPrincipal1();
-        this.dispose();
-        frame.setVisible(true);
-    }
+    }    
 //___________________________________________________________________________________ Soy una barra separadora :)
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,45 +83,97 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlContenedorPrincipal = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        txtUsuario = new javax.swing.JTextField();
-        btnAceptar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         labelDefault1 = new util.LabelDefault();
         labelDefault2 = new util.LabelDefault();
+        txtUsuario = new javax.swing.JTextField();
         pswPassword = new javax.swing.JPasswordField();
+        btnAceptar = new javax.swing.JButton();
+        btnAceptar1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
         });
 
-        pnlContenedorPrincipal.setBackground(new java.awt.Color(51, 51, 51));
+        pnlContenedorPrincipal.setBackground(new java.awt.Color(245, 245, 245));
+        pnlContenedorPrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
+        pnlContenedorPrincipal.setPreferredSize(new java.awt.Dimension(400, 505));
 
-        lblTitulo.setBackground(new java.awt.Color(56, 56, 56));
-        lblTitulo.setFont(new java.awt.Font("Arial", 1, 17)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(52, 52, 52));
+
+        lblTitulo.setFont(new java.awt.Font("Calibri", 1, 17)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(244, 244, 244));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Acceso al Sistema SICAS");
-        lblTitulo.setOpaque(true);
+        lblTitulo.setText("Sistema de costos de Agua y Saneamineto");
 
-        jPanel2.setBackground(new java.awt.Color(65, 64, 64));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel3.setBackground(new java.awt.Color(78, 157, 240));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 15, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
+        );
+
+        labelDefault1.setBackground(new java.awt.Color(255, 255, 255));
+        labelDefault1.setForeground(new java.awt.Color(173, 180, 188));
+        labelDefault1.setText("Usuario:");
+
+        labelDefault2.setBackground(new java.awt.Color(255, 255, 255));
+        labelDefault2.setForeground(new java.awt.Color(173, 180, 188));
+        labelDefault2.setText("Password:");
 
         txtUsuario.setBackground(new java.awt.Color(204, 204, 204));
         txtUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtUsuario.setText("jTextField1");
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyReleased(evt);
             }
         });
 
-        btnAceptar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        pswPassword.setBackground(new java.awt.Color(204, 204, 204));
+        pswPassword.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        pswPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pswPasswordKeyReleased(evt);
+            }
+        });
+
+        btnAceptar.setBackground(new java.awt.Color(82, 153, 205));
+        btnAceptar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnAceptar.setText("Aceptar");
-        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.setOpaque(false);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,80 +181,77 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
             }
         });
 
-        labelDefault1.setBackground(new java.awt.Color(255, 255, 255));
-        labelDefault1.setForeground(new java.awt.Color(250, 250, 250));
-        labelDefault1.setText("Usuario:");
-
-        labelDefault2.setBackground(new java.awt.Color(255, 255, 255));
-        labelDefault2.setForeground(new java.awt.Color(250, 250, 250));
-        labelDefault2.setText("Password:");
-
-        pswPassword.setBackground(new java.awt.Color(204, 204, 204));
-        pswPassword.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        pswPassword.setText("jPasswordField1");
-        pswPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                pswPasswordKeyReleased(evt);
+        btnAceptar1.setBackground(new java.awt.Color(82, 153, 205));
+        btnAceptar1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnAceptar1.setText("Cancelar");
+        btnAceptar1.setOpaque(false);
+        btnAceptar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptar1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(labelDefault1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                    .addComponent(labelDefault2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                    .addComponent(pswPassword))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelDefault1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelDefault2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pswPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel1.setForeground(new java.awt.Color(82, 153, 205));
+        jLabel1.setText("Configuración");
 
         javax.swing.GroupLayout pnlContenedorPrincipalLayout = new javax.swing.GroupLayout(pnlContenedorPrincipal);
         pnlContenedorPrincipal.setLayout(pnlContenedorPrincipalLayout);
         pnlContenedorPrincipalLayout.setHorizontalGroup(
             pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlContenedorPrincipalLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlContenedorPrincipalLayout.createSequentialGroup()
+                        .addComponent(labelDefault2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlContenedorPrincipalLayout.createSequentialGroup()
+                                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAceptar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(pswPassword)))
+                    .addGroup(pnlContenedorPrincipalLayout.createSequentialGroup()
+                        .addComponent(labelDefault1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(53, 53, 53))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContenedorPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         pnlContenedorPrincipalLayout.setVerticalGroup(
             pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContenedorPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDefault1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDefault2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pswPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(pnlContenedorPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAceptar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23))
         );
 
-        getContentPane().add(pnlContenedorPrincipal, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlContenedorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlContenedorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -223,8 +265,7 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
     }//GEN-LAST:event_txtUsuarioKeyReleased
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-//        _aceptar();
-        abrirFormPrincipal();
+        _aceptar();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -240,6 +281,10 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
             _aceptar();
         }
     }//GEN-LAST:event_pswPasswordKeyReleased
+
+    private void btnAceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnAceptar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,7 +329,10 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton btnAceptar1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private util.LabelDefault labelDefault1;
     private util.LabelDefault labelDefault2;
     private javax.swing.JLabel lblTitulo;
