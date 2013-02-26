@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 /**
  *
- * @author MK 
+ * @author miguel mosquera tahua
  */
 public class ClsMetodos {
 
