@@ -106,6 +106,8 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
 
         pnlContenedorPrincipal.setBackground(new java.awt.Color(245, 245, 245));
         pnlContenedorPrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
+        pnlContenedorPrincipal.setMaximumSize(new java.awt.Dimension(400, 505));
+        pnlContenedorPrincipal.setMinimumSize(new java.awt.Dimension(400, 505));
         pnlContenedorPrincipal.setPreferredSize(new java.awt.Dimension(400, 505));
 
         jPanel1.setBackground(new java.awt.Color(52, 52, 52));
@@ -220,8 +222,8 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
                         .addComponent(txtUsuario)))
                 .addGap(53, 53, 53))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContenedorPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(299, 299, 299)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(34, 34, 34))
         );
         pnlContenedorPrincipalLayout.setVerticalGroup(
@@ -241,7 +243,7 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
                     .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAceptar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
 
