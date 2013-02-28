@@ -4,6 +4,8 @@
  */
 package interfaz;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author Usuario
@@ -18,6 +20,12 @@ public class dlgUsuarios extends javax.swing.JDialog {
     public dlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        dlgInsumos in = new dlgInsumos(new javax.swing.JFrame(), true);
+        //jPanel1=in.panelFondo1;
+        //jPanel1.add(in.panelFondo1);
+        jPanel1.add(in.panelFondo1, BorderLayout.CENTER);
+        //this.repaint();
+        //jPanel1.getContentPane().add(new usuarios());
     }
 
     /**
@@ -35,6 +43,7 @@ public class dlgUsuarios extends javax.swing.JDialog {
         blackTabbedPane1 = new util.BlackTabbedPane();
         panelDefault2 = new util.PanelDefault();
         panelDefault3 = new util.PanelDefault();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,6 +73,17 @@ public class dlgUsuarios extends javax.swing.JDialog {
 
         blackTabbedPane1.addTab("tab2", panelDefault3);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 498, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 221, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelFondo1Layout = new javax.swing.GroupLayout(panelFondo1);
         panelFondo1.setLayout(panelFondo1Layout);
         panelFondo1Layout.setHorizontalGroup(
@@ -72,13 +92,19 @@ public class dlgUsuarios extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(blackTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(panelFondo1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelFondo1Layout.setVerticalGroup(
             panelFondo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFondo1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(blackTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelFondo1, java.awt.BorderLayout.CENTER);
@@ -129,6 +155,7 @@ public class dlgUsuarios extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private util.BlackTabbedPane blackTabbedPane1;
+    private javax.swing.JPanel jPanel1;
     private util.PanelDefault panelDefault2;
     private util.PanelDefault panelDefault3;
     private util.PanelFondo panelFondo1;
