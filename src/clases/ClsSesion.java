@@ -13,8 +13,9 @@ public class ClsSesion {
     //Declaracion de Variables
 
     public static String user = null;
-    public static String iduser=null;
-    public String[][] permisosTabla;
+    public static String iduser = null;
+    public static String idtipousuario = null;
+    public static String[][] permisosTabla;
     //Permitira almacenar los botones para poder actuar sobre ellos
 //    public JButton[] botonesAccesoTotal;
     public JButton[] botonesAccesoObservador;
@@ -29,27 +30,58 @@ public class ClsSesion {
      *
      * @descripcion Obtendra los permisos a las tablas que tiene el USER en la
      * BD
-     * @param iduser 
+     * @param iduser
      * @param userString
      * @param bd
      */
-    public void _getPermisosTabla(String iduser,String userString, ClsDatabase bd) {
+    public void _getPermisosTabla(String iduser, String userString, String tipo_usuario, ClsDatabase bd) {
         ClsSesion.user = userString;
         ClsSesion.iduser = iduser;
-        System.out.println("User:"+user);
-        Object[][] datos = bd.select("usuarios u,formulario f,userform p",
-                "f.nombre,p.permiso",
-                "u.idusuarios=p.idusuarios and f.idformulario=p.idformulario and u.idusuarios='"+iduser+"' ");//and p.acceso="+permiso_Total()+"
+
+        System.out.println("User:" + user);
+        Object[][] datos = bd.select("formulario f,usuario_formulario uf",
+                "f.nombre_real,f.nombre,uf.permiso",
+                "uf.idformulario=f.idformulario and uf.idusuario_tipo='" + tipo_usuario + "' ");//and p.acceso="+permiso_Total()+"
         if (datos != null) {
-            permisosTabla=new String[datos.length][2];
+            permisosTabla = new String[datos.length][3];
             for (int i = 0; i < datos.length; i++) {
                 permisosTabla[i][0] = datos[i][0].toString();//p.nombreformulario
-                permisosTabla[i][1] = datos[i][1].toString();//p.acceso
+                permisosTabla[i][1] = datos[i][1].toString();//p.nombreestandar
+                permisosTabla[i][2] = datos[i][2].toString();//p.acceso
                 System.out.println("___________________________________");
-                System.out.println(""+permisosTabla[i][0]+" --> "+permisosTabla[i][1]);
+                System.out.println("" + permisosTabla[i][0] + " --> " + permisosTabla[i][1]);
                 System.out.println("___________________________________");
             }
         }
+    }
+// al inicio
+    public int verifica_privilegio_general(String formulario) {
+        int v = 0;
+        for (int i = 0; i < permisosTabla.length; i++) {
+            if (permisosTabla[i][0].equals(formulario)) {
+                if (permisosTabla[i][2].equals("P")) {
+                    v = 1;
+                } else {
+                    v = 2;
+                }
+            }
+        }
+        return v;
+    }
+// por boton
+
+    public int verifica_privilegio_especifico(String formulario) {
+        int v = 0;
+        for (int i = 0; i < permisosTabla.length; i++) {
+            if (permisosTabla[i][0].equals(formulario)) {
+                if (permisosTabla[i][2].equals("P")) {
+                    v = 1;
+                } else {
+                    v = 2;
+                }
+            }
+        }
+        return v;
     }
     //___________________________________________________________________________________ Soy una barra separadora :)
 

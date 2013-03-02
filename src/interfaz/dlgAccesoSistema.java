@@ -33,9 +33,9 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
         this.pswPassword.setText("");
         this.txtUsuario.requestFocus();
         //Configuramos la clase bd
-        bd.setDataBase("bd_prueba2");
-        bd.setUser("root");
-        bd.setPassword("admin");
+//        bd.setDataBase("bd_prueba2");
+//        bd.setUser("root");
+//        bd.setPassword("admin");
         this.setLocationRelativeTo(null);
     }
     
@@ -54,10 +54,10 @@ public class dlgAccesoSistema extends javax.swing.JDialog {
     //        passString = seguridad.encriptar(passString, seguridad.getMD5());
             
             //Verificamos en la BD el acceso de usuario
-            Object[][] datos = bd.select("usuarios", "uuser,idusuarios", "uuser='" + userString + "' and upassword='" + passString + "'");
+            Object[][] datos = bd.select("usuario", "nombre_usuario,idusuario,idusuario_tipo", "nombre_usuario='" + userString + "' and password='" + passString + "'");
             if (datos != null) {
                 System.out.println("dato:"+datos[0][0].toString());
-                sesion._getPermisosTabla(datos[0][0].toString(),userString, bd);
+                sesion._getPermisosTabla(datos[0][0].toString(),userString,datos[0][2].toString(), bd);
                 accesoSistema=true;
     //            frmPrincipal frame = new frmPrincipal(bd);
                 frmPrincipal frame = new frmPrincipal();

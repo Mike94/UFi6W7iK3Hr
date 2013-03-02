@@ -1,7 +1,11 @@
 package clases;
 
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.table.*;
 
 /**
  *
@@ -9,7 +13,90 @@ import java.util.Calendar;
  */
 public class ClsMetodos {
 
+    private ClsDatabase bd = new ClsDatabase();
+
+    /**
+     *
+     * @author sergio
+     */
+    public void tablaLimpia(javax.swing.table.DefaultTableModel md) {
+        while (md.getRowCount() > 0) {
+            md.removeRow(0);
+        }
+    }
+
+    public void tablaLongitudColumnas(javax.swing.JTable table, int longitudes[]) {
+        int ancho = 0;
+        TableColumnModel mc = table.getColumnModel();
+        TableColumn columnaTabla;
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            columnaTabla = mc.getColumn(i);
+            ancho = longitudes[i];
+            columnaTabla.setPreferredWidth(ancho);
+        }
+    }
+
+    public void tablaLlenaSimple(javax.swing.JTable jtable1, Object mat[]) {
+        DefaultTableModel mdt = (DefaultTableModel) jtable1.getModel();
+        tablaLimpia(mdt);
+        //mdt.addRow(mat);
+        //mdt.
+    }
+
+    public boolean tablaLlenaSql(javax.swing.JTable jtable1, String sql, int n) {
+        DefaultTableModel mdt = (DefaultTableModel) jtable1.getModel();
+
+        tablaLimpia(mdt);
+        boolean va = true;
+        try {
+
+            bd.getConnection();
+
+            PreparedStatement pstm = bd.conn.prepareStatement(sql);
+
+            ResultSet res = pstm.executeQuery();
+//            pstm.get
+//            res.get
+
+            while (res.next()) {
+                Object mat[] = new Object[n];
+                for (int i = 0; i < n; i++) {
+                    mat[i] = res.getString(i + 1);
+                }
+                mdt.addRow(mat);
+            }
+
+            res.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println(sql);
+        return va;
+    }
+
+    public void comboboxLlenar(JComboBox cb, DefaultComboBoxModel mlb, String sql) {
+        mlb.removeAllElements();
+        cb.removeAllItems();
+        try {
+            bd.getConnection();
+            PreparedStatement pstm = bd.conn.prepareStatement(sql);
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                mlb.addElement(res.getString(1));
+                cb.addItem(res.getString(2));
+            }
+            res.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        cb.setSelectedIndex(-1);
+        cb.setPopupVisible(false);
+
+    }
+
+
 //___________________________________________________________________________________ Soy una barra separadora :)
+
     /**
      * @function getExtraerFechaJDateChooser
      * @param dateChooserString
@@ -113,6 +200,7 @@ public class ClsMetodos {
         fechaAsignadaString = sdf.format(calendar.getTime());
         return fechaAsignadaString;
     }
+
     /**
      *
      * @param calendarFechaString
@@ -133,6 +221,7 @@ public class ClsMetodos {
         return fechaAsignadaString;
     }
     //___________________________________________________________________________________ Soy una barra separadora :)
+
     /**
      * Metodo que permite cerrar todo el Sistema
      */

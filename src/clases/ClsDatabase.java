@@ -9,12 +9,12 @@ import java.sql.*;
 public class ClsDatabase {
     /* DATOS PARA LA CONEXION */
 
-    private static String bd = "bd_prueba2";
+    private static String bd = "bd_costos";
     private static String login = "root";
-    private static String password = "admin";
+    private static String password = "123";
     private static String host = "localhost";
     private static String url = "jdbc:mysql://" + host + "/" + bd;
-    private Connection conn = null;
+    public Connection conn = null;
 //___________________________________________________________________________________ Soy una barra separadora :)
 
     public ClsDatabase() {
@@ -31,8 +31,8 @@ public class ClsDatabase {
             e.printStackTrace();
         }
     }
-//___________________________________________________________________________________ Soy una barra separadora :)
 
+//___________________________________________________________________________________ Soy una barra separadora :)
     public Connection getConnection() {
         return this.conn;
     }
@@ -79,11 +79,11 @@ public class ClsDatabase {
             q += " WHERE " + where;
             q2 += " WHERE " + where;
         }
-        System.out.println("sql->q: "+q);
+        System.out.println("sql->q: " + q);
         //obtenemos la cantidad de registros existentes en la tabla
         try {
             PreparedStatement pstm = conn.prepareStatement(q2);
-            System.out.println("sql->q2: "+q2);
+            System.out.println("sql->q2: " + q2);
             ResultSet res = pstm.executeQuery();
             res.next();
             registros = res.getInt("total");
@@ -93,10 +93,10 @@ public class ClsDatabase {
             System.out.println("...............................................................................");
             e.printStackTrace();
         }
-        System.out.println("registros: "+registros);
-        System.out.println("columnas: "+fields.split(",").length);
+        System.out.println("registros: " + registros);
+        System.out.println("columnas: " + fields.split(",").length);
 
-        if (registros>0) {
+        if (registros > 0) {
             //Se crea una matriz con tantas filas y columnas que necesite
             Object[][] data = new String[registros][fields.split(",").length];
             //Realizamos la consulta sql y llenamos los datos en la matriz "Object"
@@ -153,6 +153,40 @@ public class ClsDatabase {
             System.err.println(e);
         }
         return res;
+    }
+
+    public boolean delete(String table, String values) {
+        boolean res = false;
+        //Se arma la consulta
+        String q = " delete from " + table + " where " + values + "  ";
+        System.err.println(q);
+        try {
+            PreparedStatement pstm = conn.prepareStatement(q);
+            pstm.execute();
+            pstm.close();
+            res = true;
+        } catch (SQLException e) {
+            System.err.println("Error en [Paquete: MODEL - NombreComponete: DATABASE.java(CLASS) - Funcion: boolean insert()]...");
+            System.err.println(e);
+        }
+        return res;
+    }
+
+    public boolean verif_repite(String sql) {
+        boolean b = false;
+        try {
+
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                b = true;
+            }
+            res.close();
+        } catch (Exception e) {
+            b = false;
+            System.out.println(e);
+        }
+        return b;
     }
 //___________________________________________________________________________________ Soy una barra separadora :)
     /* METODO PARA ACTUALIZAR UN REGISTRO EN LA BASE DE DATOS
